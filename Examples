@@ -1,0 +1,80 @@
+-----------------------------------------------------------------------------------
+
+?:
+std::cout << (x > 0 ? "x is positive" : "x is non-positive");
+
+-----------------------------------------------------------------------------------
+Sort a struct
+-----------------------------------------------------------------------------------
+To sort a struct in C++, you can use the std::sort() function from the Standard Template Library (STL)
+with a custom comparator function that defines how the struct should be sorted.
+
+Suppose we have the following struct Person that represents a person with a name and an age:
+
+c++
+Copy code
+struct Person {
+    std::string name;
+    int age;
+};
+
+We can sort an array of Person structs based on their age using
+std::sort() and a custom comparator function as follows:
+
+c++
+Copy code
+#include <algorithm>
+#include <iostream>
+#include <string>
+
+struct Person {
+    std::string name;
+    int age;
+};
+
+bool compareByAge(const Person& a, const Person& b) {
+    return a.age < b.age;
+}
+
+int main() {
+    Person people[] = {
+        {"Alice", 25},
+        {"Bob", 30},
+        {"Charlie", 20},
+        {"Dave", 35},
+    };
+    int n = sizeof(people) / sizeof(people[0]);
+
+    std::sort(people, people + n, compareByAge);
+
+    std::cout << "People sorted by age:\n";
+    for (int i = 0; i < n; ++i) {
+        std::cout << people[i].name << " (" << people[i].age << ")\n";
+    }
+
+    return 0;
+}
+
+In this code, we define a custom comparator function compareByAge()
+that takes two Person structs as arguments and returns true if the
+first person is younger than the second person (based on their age).
+We then use std::sort() to sort the array of Person structs based on
+their age using the compareByAge() function as the sorting criterion.
+
+The output of the program would be:
+
+csharp
+Copy code
+People sorted by age:
+Charlie (20)
+Alice (25)
+Bob (30)
+Dave (35)
+
+Note that we could define multiple comparator functions for sorting
+the same struct in different ways (e.g., by name instead of age),
+and we could also use lambda functions instead of named functions
+for the comparators. The key is to provide a function that takes
+two elements and returns true if the first element should come before
+the second element in the sorted output.
+-----------------------------------------------------------------------------------
